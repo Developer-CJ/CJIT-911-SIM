@@ -4,7 +4,7 @@
 
 A multi-agency 911 communications simulator featuring incident intake, simulated emergency calls, CAD workflows, unit dispatch and two-way radio traffic. Developed by **CJIT Solutions / CJIT Networks**.
 
-> **Project status:** Active development. This repository currently holds project documentation; deployed application source and operational integration have not been verified in this repository.
+> **Project status (November 2026):** The deployed Cloudflare Worker snapshot is tracked at `deploy/worker.js`. This is a production snapshot, not yet a complete original source/build tree. Individual simulator voice, microphone, and synchronization workflows still require end-to-end functional testing.
 
 ## Project links
 
@@ -15,7 +15,7 @@ A multi-agency 911 communications simulator featuring incident intake, simulated
 | Radio gateway | https://radio.911.cjitservices.tech |
 | AI radio service | https://radio.ai.911.cjitnetworks.com |
 
-URLs are project targets, **not** proof of live availability.
+The main console and administration URL were checked against their page identity in production in November 2026. Other service endpoints require ongoing monitoring; an HTTP response alone does not verify full feature operation.
 
 ## Product scope
 
@@ -46,7 +46,7 @@ Actual resource bindings, model IDs, deployment commands and usage costs must be
 
 ## Engineering priorities
 
-1. Import the deployed source into this repository and document its actual dependencies.
+1. Replace the tracked deployed Worker snapshot with the original, modular build sources and document all dependencies.
 2. Verify inbound call audio, two-way PTT, radio channel switching and AI responses.
 3. Guarantee an audible fallback when AI voice generation is unavailable; test replay and refresh behavior.
 4. Synchronize CAD incidents, unit statuses, map positions and radio traffic.
