@@ -1,27 +1,28 @@
 # Deployed Cloudflare Worker snapshot — Metrocoms 911
 
-Snapshot date: 2026-11-10 (UTC). Source: active Cloudflare Worker `cjit-911-radio-ai`; production deployment version `58502ad0-bf56-4eed-8f94-4d78b6518428` at inspection.
+Source: the live `cjit-911-radio-ai` Worker, inspected November 10, 2026 (UTC). This repository tracks a deployed snapshot; the worker may change in Cloudflare between repository updates.
 
-## Files
+## Included in `deploy/worker.js`
 
-- `deploy/worker.js` — preserved Worker script from Cloudflare, including 911 console, admin console, AI radio and voice service routes, and ATC administration hostname branding correction.
+- Metrocoms browser console with call taking, CAD/incident management, radio/PTT, unit-map workflows, and multi-monitor controls.
+- Administrator configuration page, including ATC-branded administration served by the shared Worker where configured.
+- Cloudflare Workers AI radio/caller/incident responses, speech/voice endpoints, and configurable audio assets.
+- Integrated Scenario Command: simulated medical, fire, traffic, utility, flooding and hazardous incidents, decision-driven phases and D1 event history.
+- Browser-native Basic Authentication protecting the main Metrocoms and administration hostnames; passwords remain Worker secrets, not source code.
 
-## Production hostnames
+## Project URLs
 
-- `911.cjitnetworks.com` — Metrocoms main browser simulator.
-- `admin.911.cjitnetworks.com` — Metrocoms administration.
-- `admin.atc.cjitnetworks.com` — ATC-branded administration served by this shared backend.
-- `radio.911.cjitservices.tech` — radio/AI gateway.
-- `radio.ai.911.cjitnetworks.com` — AI radio gateway.
+- Main simulator: https://911.cjitnetworks.com
+- Administrator: https://admin.911.cjitnetworks.com
+- Radio gateway: https://radio.911.cjitservices.tech
+- AI radio gateway: https://radio.ai.911.cjitnetworks.com
 
-## Required Cloudflare bindings (no values included)
+## Dependencies and limitations
 
-- `AI` (Workers AI)
-- `DB` (D1; configure the production database in Cloudflare)
-- `AUDIO`, `ATC_AUDIO` (R2 buckets)
+Cloudflare bindings required by the Worker: Workers AI, D1, and the configured R2 audio buckets. Authentication secrets are set separately from source. Database schema and deployment metadata are managed outside this snapshot; don't deploy this file to a fresh account without checking them.
 
-## Status and caveats
+The Scenario Command backend was tested in production through create, dispatch, arrival, stabilization and resolution, with Workers AI dialogue and D1 event persistence. This does **not** verify every UI interaction, microphone permission, live audio playback or the complete AI voice → synthesized TTS → prerecorded fallback chain. Those still require client-device testing.
 
-This is a **deployment-source snapshot**, not a promise that every UI, voice reply, microphone, sound asset, fallback, subscription or account flow is fully implemented and verified. The admin branding update is present in the worker code. HTTP status and page identity have been checked; end-to-end audio and interaction tests remain necessary.
+This source is intentionally public under the repository's existing GPL v3 license, as approved by the repository owner. Do not commit actual credentials, session tokens, private account IDs, network topology exports, customer data, or audio files you don't have permission to redistribute.
 
-The deployed Worker currently has voice usage limits and a separate administrator login. Never commit real passwords, tokens, database exports or account secrets. Keep this public repository free of customer information and infrastructure credentials. Before redeploying, review the Worker settings and preserve existing bindings to avoid downtime.
+**Powered By CJIT · Plan. Test. Deliver. Support.**
